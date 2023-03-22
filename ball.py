@@ -7,7 +7,7 @@ class Ball(Turtle):
         super().__init__()
         self.screen_width = screen_width
         self.screen_height = screen_height
-        self.move_x = -random.choice([10, -10]);
+        self.move_x = random.choice([10, -10]);
         self.move_y = random.choice([10, -10]);
         self.color("white")
         self.shape("circle")
@@ -34,9 +34,11 @@ class Ball(Turtle):
         return False
 
     def is_collision_with_paddle(self, paddle):
-        if abs(self.xcor()) + 20 >= abs(paddle.xcor()) and self.distance(paddle) < 50 and abs(self.xcor()) - abs(paddle.xcor()) < 10:
-            print(f"Rebound with ball at {self.position()} and away paddel at {paddle.position()} and distance of"
-                  f" {self.distance(paddle)}")
+        #if we are hitting the paddle in the next move and we are close to its ends it's true
+        #but we need to control that we have not overpassed the paddle position and hence the
+        #second condition
+        if abs(self.xcor()) + 20 >= abs(paddle.xcor()) and self.distance(paddle) < 50\
+                and abs(self.xcor()) - abs(paddle.xcor()) < 10:
             return True
         return False
 
